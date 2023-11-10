@@ -1,6 +1,6 @@
 <?php
-include "header.php";
-include "dados.php";
+   include "header.php";
+   include "config.php";
 ?>
 <main>
     <h1>Entre em Contato:</h1>
@@ -20,5 +20,5 @@ include "dados.php";
     </form>
 </main>
 <?php
-include "footer.php";
+   include "footer.php";
 ?>

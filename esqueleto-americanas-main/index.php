@@ -1,39 +1,47 @@
-<?php
-include "header.php";
-include "dados.php";
 
-    //print_r($produtos); exit;
- 
-?>
+
+<?php
+   include "header.php";
+   include "config.php";
+   
+   $sql = "select * from produto";
+   $consulta = $pdo->prepare($sql);
+   $consulta->execute();
+
+
+   $produtos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+   //print_r($produto);exit;
+?>   
 
 <main>
     <h1>Produtos destaque:</h1>
     <div class="grid">
- <?php
-  $i = 1;
-   shuffle($produtos); 
-  foreach ($produtos as $produto) {
- ?>
-    <div class ="coluna">
-        
-    <img src="imagens/<?=$produto["imagem"]?>" alt="<?=$produto["nome"]?>">
-    <p>
-        <strong><?=$produto["nome"]?></strong>
-        <br>
-        R$ <?=$produto ["valor"]?>
-    <p>
+        <?php
+           $i = 1;
 
-    <p>
-     <a href="produto.php?id=<?=$produto["id"]?>">Detalhes</a>   
-    <p>
+           shuffle($produtos);
+           foreach($produtos as $produto) {
+        ?>
+        <div class="coluna"> 
+            <img src="imagens/<?=$produto["imagem"]?>" alt="<?=$produto["nome"]?>">
+            <p>
+                <strong><?=$produto["nome"]?></strong>
+                <br>
+                R$ <?=$produto["valor"]?> 
+           </p>
+           
+           <p>
+               <a href="produto.php?id=<?=$produto["id"]?>">detalhes</a>
+           </p>    
+        </div>
+        <?php
+           $i++;
+           if($i > 4 ) break;
+           }
+        ?>      
     </div>
- <?php
-     $i++;
-     if( $i > 4) break;
-        }
- ?>
-    </div>
- </main>
+</main>
+
 <?php
-include "footer.php";
+   include "footer.php";
 ?>
